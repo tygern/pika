@@ -1,0 +1,17 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <title>{% block title %}Pika{% endblock %}</title>
+</head>
+
+<body>
+<header>
+    <h1>{% block heading %}{% endblock %}</h1>
+</header>
+<main>{% block content %}{% endblock %}</main>
+</body>
+</html>
