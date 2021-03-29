@@ -53,3 +53,7 @@ main, header {
     margin: 0 auto;
     max-width: 800px;
 }
+
+form.inline {
+    display: inline-block;
+}

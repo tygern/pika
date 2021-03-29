@@ -36,3 +36,12 @@ class BlogEntryView(generic.View):
         entry = self.__repo.find(pk)
 
         return render(request, 'blog/detail.html', {'entry': entry})
+
+
+class DeleteBlogEntryView(generic.View):
+    __repo = BlogEntryRepository()
+
+    def post(self, request, pk: int):
+        self.__repo.delete(pk)
+
+        return HttpResponseRedirect(reverse('blog:entries'))

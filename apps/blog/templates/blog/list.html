@@ -9,7 +9,13 @@
     {% if blog_entries %}
         <ul>
             {% for entry in blog_entries %}
-                <li><a href="{% url 'blog:entry_detail' entry.id %}">{{ entry.title }}</a></li>
+                <li>
+                    <a href="{% url 'blog:entry_detail' entry.id %}">{{ entry.title }}</a>
+                    <form action="{% url 'blog:delete_entry' entry.id %}" method="post" class="inline">
+                        {% csrf_token %}
+                        <input type="submit" value="Delete">
+                    </form>
+                </li>
             {% endfor %}
         </ul>
     {% else %}

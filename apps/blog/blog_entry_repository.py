@@ -1,9 +1,17 @@
 from django.db import models
+from django.db.models.functions import Now
 
 from apps.blog.blog_entry import BlogEntry
 
 
+class NotDeletedManager(models.Manager):
+    def get_queryset(self):
+        return super().get_queryset().filter(deleted_at__isnull=True)
+
+
 class BlogEntryRecord(models.Model):
+    objects = NotDeletedManager()
+
     db_table = 'blog_entries'
 
     title = models.CharField(max_length=300)
@@ -11,9 +19,10 @@ class BlogEntryRecord(models.Model):
     author = models.CharField(max_length=300)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    deleted_at = models.DateTimeField(null=True)
 
 
-class BlogEntryRepository():
+class BlogEntryRepository:
     __manager = BlogEntryRecord.objects
 
     def create(self, title: str, body: str, author: str) -> BlogEntry:
@@ -28,6 +37,9 @@ class BlogEntryRepository():
 
     def find(self, id: int) -> BlogEntry:
         return self.__manager.get(pk=id)
+
+    def delete(self, id: int) -> None:
+        self.__manager.filter(pk=id).update(deleted_at=Now())
 
     @staticmethod
     def __entry_from_record(record) -> BlogEntry:
