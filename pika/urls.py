@@ -19,4 +19,5 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('apps.pika_app.urls')),
+    path('blog/', include('apps.blog.urls')),
 ]

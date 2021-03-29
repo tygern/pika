@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Pika blog{% endblock %}
+{% block heading %}Create entry{% endblock %}
+{% block content %}
+    <form action="{% url 'blog:entries' %}" method="post">
+        {% csrf_token %}
+        <label>
+            Title
+            <input type="text" name="title">
+        </label>
+        <label>
+            Author
+            <input type="text" name="author">
+        </label>
+        <label>
+            Body
+            <textarea name="body"></textarea>
+        </label>
+
+        <input type="submit" value="Create">
+    </form>
+{% endblock %}

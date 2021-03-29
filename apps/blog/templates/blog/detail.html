@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ entry.title }} | Pika blog{% endblock %}
+{% block heading %}{{ entry.title }}{% endblock %}
+{% block content %}
+    <span>{{ entry.author }}</span>
+    <p>{{ entry.body }}</p>
+
+    <a href="{% url 'blog:entries' %}">Back to blog entries</a>
+{% endblock %}

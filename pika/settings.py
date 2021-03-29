@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'apps.pika_app',
+    'apps.blog',
 ]
 
 MIDDLEWARE = [
